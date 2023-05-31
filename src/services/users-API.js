@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const userService = axios.create({
-  baseURL: 'http://6477a62b9233e82dd53bfde1.mockapi.io/',
+const usersService = axios.create({
+  baseURL: 'http://6477a62b9233e82dd53bfde1.mockapi.io/users',
 });
 
 export const getUsers = async () => {
-  const { data } = await userService.get('users/');
+  const { data } = await usersService.get('');
   // console.log(data);
   return data;
   
 };
 
 export const updateUsers = async id => {
-  const { data } = await userService.put(`users/${id}`);
+  const { data } = await usersService.put(`${id}`);
   return data;
 };

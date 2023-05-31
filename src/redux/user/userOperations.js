@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getUsers, updateUsers } from '../../services/users-API';
 
-export const getUsersThunk = createAsyncThunk('user/fetchAll', async (_, { rejectWithValue }) => {
+export const getUsersThunk = createAsyncThunk('users/fetchAll', async (_, { rejectWithValue }) => {
   try {
-    const {data} = await getUsers();
-
+    const data = await getUsers();
+    console.log(data);
     return data;
   } catch (error) {
     console.log('error', error.message);
@@ -12,7 +12,7 @@ export const getUsersThunk = createAsyncThunk('user/fetchAll', async (_, { rejec
   }
 });
 
-export const updateUserThunk = createAsyncThunk('user/update', async (id, { rejectWithValue }) => {
+export const updateUserThunk = createAsyncThunk('users/update', async (id, { rejectWithValue }) => {
   try {
     const data = await updateUsers(id);
     return data;
