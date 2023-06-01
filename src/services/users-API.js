@@ -6,7 +6,6 @@ const usersService = axios.create({
 
 export const getUsers = async () => {
   const { data } = await usersService.get('users/');
-  // console.log(data);
   return data;
 };
 

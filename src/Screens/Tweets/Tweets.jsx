@@ -4,13 +4,23 @@ import { getUsersThunk, updateUserThunk } from '../../redux/user/userOperations'
 import { selectUser } from '../../redux/user/userSelector';
 import { Card } from '../../Components/Card/Card';
 import { Button } from '../../Components/Button/Button';
+import { Pagination } from '../../Components/Pagination/Pagination';
 // import { updateSubscription } from '../../redux/user/userSlice';
 
 export const Tweets = () => {
   const [userData, setUserData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userPerPage] = useState(2);
+
   const dispatch = useDispatch();
 
   const userList = useSelector(selectUser);
+
+  const lastUserIndex = currentPage * userPerPage;
+  const firtUserIndex = lastUserIndex - userPerPage;
+  const currentUser = userList.slice(firtUserIndex, lastUserIndex);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(getUsersThunk());
@@ -18,7 +28,6 @@ export const Tweets = () => {
 
   useEffect(() => {
     if (userData) {
-      console.log(userData.id, userData);
       dispatch(updateUserThunk({ id: userData.id, user: userData }))
         .unwrap()
         .then(() => dispatch(getUsersThunk()));
@@ -28,7 +37,6 @@ export const Tweets = () => {
   const onClick = id => {
     const user = userList.find(item => item.id === id);
     if (user) {
-      // dispatch(updateSubscription({ id }));
       userList.map(item => {
         if (item.id === user.id) {
           const updatedUser = { ...item };
@@ -38,38 +46,26 @@ export const Tweets = () => {
           } else {
             updatedUser.followers -= 1;
           }
-          // return { ...item, subscription: !item.subscription, item.folower };
+
           setUserData(updatedUser);
         }
         return item;
       });
-      //   console.log('id', user.id);
-      //   dispatch(updateUserThunk({ id: user.id }, newUserList))
-      //     .then(() => {
-      //       console.log('User updated successfully');
-      //       dispatch(getUsersThunk()); // Оновити userList після успішного оновлення
-      //     })
-      //     .catch(error => {
-      //       console.log('Error updating user:', error);
-      //     });
     }
   };
 
   return (
     <>
-      {userList.length > 0 ? (
-        userList.map(item => (
-          <li key={item.id}>
-            <Card img={item.avatar} tweets={item.tweets} followers={item.followers} />
-            <Button
-              textButton={item.subscription ? 'Following' : 'Follow'}
-              onClick={() => onClick(item.id)}
-            />
-          </li>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      {currentUser.map(item => (
+        <li key={item.id}>
+          <Card img={item.avatar} tweets={item.tweets} followers={item.followers} />
+          <Button
+            textButton={item.subscription ? 'Following' : 'Follow'}
+            onClick={() => onClick(item.id)}
+          />
+        </li>
+      ))}
+      <Pagination userPerPage={userPerPage} totalUser={userList.length} paginate={paginate} />
     </>
   );
 };

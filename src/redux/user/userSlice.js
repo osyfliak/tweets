@@ -46,7 +46,6 @@ const userSlice = createSlice({
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        // state.userItems = payload;
       })
       .addCase(updateUserThunk.rejected, state => {
         state.isLoading = false;
