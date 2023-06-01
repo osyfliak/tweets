@@ -8,6 +8,24 @@ const userSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  reducers: {
+    updateSubscription(state, action) {
+      const { id } = action.payload;
+      state.userItems = state.userItems.map(user => {
+        if (user.id === id) {
+          const updatedUser = { ...user };
+          updatedUser.subscription = !updatedUser.subscription;
+          if (updatedUser.subscription) {
+            updatedUser.followers += 1;
+          } else {
+            updatedUser.followers -= 1;
+          }
+          return updatedUser;
+        }
+        return user;
+      });
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getUsersThunk.pending, state => {
@@ -15,23 +33,27 @@ const userSlice = createSlice({
       })
       .addCase(getUsersThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.error = null;
         state.userItems = payload;
       })
       .addCase(getUsersThunk.rejected, state => {
         state.isLoading = false;
         state.error = alert('error');
       })
-      .addCase(updateUserThunk, state => {
+      .addCase(updateUserThunk.pending, state => {
         state.isLoading = true;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.userItems = payload;
+        state.error = null;
+        // state.userItems = payload;
       })
       .addCase(updateUserThunk.rejected, state => {
         state.isLoading = false;
-        state.error = alert('error');
+        state.error = alert('errorUpdate');
       });
   },
 });
+
+export const { updateSubscription } = userSlice.actions;
 export const userReducer = userSlice.reducer;

@@ -12,12 +12,17 @@ export const getUsersThunk = createAsyncThunk('users/fetchAll', async (_, { reje
   }
 });
 
-export const updateUserThunk = createAsyncThunk('users/update', async (id, { rejectWithValue }) => {
-  try {
-    const data = await updateUsers(id);
-    return data;
-  } catch (error) {
-    console.log('error', error.message);
-    return rejectWithValue();
+export const updateUserThunk = createAsyncThunk(
+  'users/update',
+  async ({ id, user }, { rejectWithValue }) => {
+    try {
+      // console.log(id);
+      const data = await updateUsers(id, user);
+
+      return data;
+    } catch (error) {
+      console.log('error', error.message);
+      return rejectWithValue();
+    }
   }
-});
+);

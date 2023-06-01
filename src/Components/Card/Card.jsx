@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const Card = ({ img }) => {
+export const Card = ({ img, tweets, followers}) => {
   return (
-    <div>
+    <>
       <img src={img} alt="avatar" />
-    </div>
+      <p>{tweets} TWEETS</p>
+      <p>{followers} FOLOWERS</p>
+    </>
   );
 };
