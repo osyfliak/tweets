@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { FollowButton } from './button.styled';
 
-export const Button = ({textButton, onClick}) => {
+export const Button = ({ className, textButton, onClick }) => {
   return (
-    <button onClick={onClick}>{textButton}</button>
-  )
-}
+    <FollowButton className={className} onClick={onClick}>
+      {textButton}
+    </FollowButton>
+  );
+};

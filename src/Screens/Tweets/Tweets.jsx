@@ -5,12 +5,13 @@ import { selectUser } from '../../redux/user/userSelector';
 import { Card } from '../../Components/Card/Card';
 import { Button } from '../../Components/Button/Button';
 import { Pagination } from '../../Components/Pagination/Pagination';
+import { Block, Items,} from './tweets.styled';
 // import { updateSubscription } from '../../redux/user/userSlice';
 
 export const Tweets = () => {
   const [userData, setUserData] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage] = useState(2);
+  const [userPerPage] = useState(3);
 
   const dispatch = useDispatch();
 
@@ -56,15 +57,17 @@ export const Tweets = () => {
 
   return (
     <>
-      {currentUser.map(item => (
-        <li key={item.id}>
-          <Card img={item.avatar} tweets={item.tweets} followers={item.followers} />
-          <Button
-            textButton={item.subscription ? 'Following' : 'Follow'}
-            onClick={() => onClick(item.id)}
-          />
-        </li>
-      ))}
+      <Block>
+        {currentUser.map(item => (
+          <Items key={item.id}>
+            <Card img={item.avatar} tweets={item.tweets} followers={item.followers} />
+            <Button
+              textButton={item.subscription ? 'Following' : 'Follow'}
+              onClick={() => onClick(item.id)}
+            />
+          </Items>
+        ))}
+      </Block>
       <Pagination userPerPage={userPerPage} totalUser={userList.length} paginate={paginate} />
     </>
   );
