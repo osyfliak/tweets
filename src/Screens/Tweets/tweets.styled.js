@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FollowButton } from '../../Components/Button/Button';
 
 export const Block = styled.ul`
   display: flex;
@@ -15,11 +14,3 @@ export const Items = styled.li`
   align-items: center;
   border-radius: 20px;
 `;
-
-
-export const Button = styled(FollowButton)`
-width: 196px;
-height: 50px;
-border-radius: 10.31px;
-border: none
-`
