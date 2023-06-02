@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const usersService = axios.create({
-  baseURL: 'http://6477a62b9233e82dd53bfde1.mockapi.io/',
+  baseURL: 'https://6477a62b9233e82dd53bfde1.mockapi.io/',
 });
 
 export const getUsers = async () => {
