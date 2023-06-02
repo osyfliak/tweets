@@ -6,6 +6,7 @@ export const Block = styled.ul`
 `;
 
 export const Items = styled.li`
+  position: relative;
   background: linear-gradient(114.99deg, #471ca9 -0.99%, #5736a3 54.28%, #4b2a99 78.99%);
   width: 380px;
   height: 460px;
@@ -13,4 +14,12 @@ export const Items = styled.li`
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
+  overflow: hidden;
+`;
+
+export const Line = styled.img`
+  position: absolute;
+  top: 51.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
