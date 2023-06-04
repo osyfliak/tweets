@@ -1,13 +1,15 @@
+import { Option, Select } from "./dropdown.styled";
+
 export const Dropdown = ({ value, onChange }) => {
   if (!value) {
     return null;
   }
 
   return (
-    <select value={value} onChange={onChange}>
-      <option value="show all">Show All</option>
-      <option value="follow">Follow</option>
-      <option value="followings">Followings</option>
-    </select>
+    <Select value={value} onChange={onChange}>
+      <Option value="show all">Show All</Option>
+      <Option value="follow">Follow</Option>
+      <Option value="followings">Followings</Option>
+    </Select>
   );
 };

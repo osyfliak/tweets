@@ -1,8 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Poster from '../../images/backdrop.jpg';
 
 export const Home = () => {
-  return (
-   <Link to='/tweets'>Tweets go!!!!!!!!!!!</Link>
-  )
-}
+  return <img src={Poster} alt="poster" />;
+};

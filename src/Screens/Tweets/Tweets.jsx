@@ -85,6 +85,7 @@ export const Tweets = () => {
   const filteredUsers = filterUsers();
   return (
     <>
+    
       <Dropdown value={filterType} onChange={handleFilterChange}>
         <option value="show all">Show All</option>
         <option value="follow">Follow</option>
