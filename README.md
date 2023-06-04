@@ -17,6 +17,6 @@
 
 ## Автори
 
-- Ім'я автора 1 - [@osyfliak](https://github.com/osyfliak)
+- Osyfliak Ivan - [@osyfliak](https://github.com/osyfliak)
 
 
